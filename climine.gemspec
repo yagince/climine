@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Climine::VERSION
   spec.authors       = ["yagince"]
   spec.email         = ["straitwalk@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{CLI for Redmine}
+  spec.summary       = %q{CLI for Redmine}
   spec.homepage      = ""
   spec.license       = "MIT"
 
