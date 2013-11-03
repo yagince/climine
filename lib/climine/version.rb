@@ -1,0 +1,3 @@
+module Climine
+  VERSION = "0.0.1"
+end
