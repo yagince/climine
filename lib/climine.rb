@@ -1,5 +1,5 @@
 require "climine/version"
-require "climine/command"
+require "climine/cli"
 
 module Climine
 end

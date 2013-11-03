@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'climine'
-Climine::Command.start(ARGV)
+Climine::CLI.start(ARGV)
