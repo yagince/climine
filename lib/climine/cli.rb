@@ -1,9 +1,11 @@
 require 'thor'
-require 'climine/command/config'
 require 'climine/config'
+require 'climine/command/config'
+require 'climine/command/issue'
 
 class Climine::CLI < Thor
   include Climine::Command::Config
+  include Climine::Command::Issue
 
   desc "hello NAME", "say hello to NAME"
   def hello(name)
