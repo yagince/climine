@@ -5,7 +5,7 @@ module Climine::Command
     CONFIG = "config.yml"
     TEMPLATE = <<-ERB
 url: <%= options[:url] %>
-key: <%= options[:key] %>
+apikey: <%= options[:key] %>
     ERB
 
     def self.included base
@@ -16,6 +16,7 @@ key: <%= options[:key] %>
         option :key, required: true, type: :string, aliases: '-k', banner: "API-Access-Key", desc: "Your API Access Key"
         def init
           open(CONFIG, 'w'){|file| file.write(ERB.new(TEMPLATE).result(binding)) }
+          puts "create [ #{File.expand_path(CONFIG)} ]"
         end
 
       end
