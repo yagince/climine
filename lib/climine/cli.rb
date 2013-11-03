@@ -1,4 +1,5 @@
 require 'thor'
+require 'climine/redmine'
 require 'climine/config'
 require 'climine/command/config'
 require 'climine/command/issue'
@@ -13,4 +14,10 @@ class Climine::CLI < Thor
     puts Climine::Config.new.url
     puts Climine::Config.new.apikey
   end
+
+  no_commands {
+    def redmine
+      @redmine ||= Climine::Redmine.new(Climine::Config.new)
+    end
+  }
 end
