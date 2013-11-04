@@ -10,7 +10,7 @@ module Climine::Command
     def self.included base
       base.class_eval {
 
-        desc "issues", "get Redmine Issues"
+        desc "issue [TICKET_NO]", "get Redmine Issues."
         def issue(id=nil)
           erb = ERB.new(Climine::Template.issue)
           (id ? [redmine.issue(id)] : redmine.issues.issues).each {|issue|
