@@ -1,5 +1,9 @@
-require 'net/http'
-require 'uri'
+require "net/http"
+require "uri"
+require "climine/template"
+require "erb"
+require "time"
+require "pp"
 
 module Climine::Command
   module Issue
@@ -8,7 +12,10 @@ module Climine::Command
 
         desc "issues", "get Redmine Issues"
         def issue(id=nil)
-          puts( id ? redmine.issue(id) : redmine.issues )
+          erb = ERB.new(Climine::Template.issue)
+          (id ? [redmine.issue(id)] : redmine.issues.issues).each {|issue|
+            puts erb.result(binding) unless issue.error
+          }
         end
 
       }

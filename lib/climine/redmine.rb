@@ -11,7 +11,7 @@ class Climine::Redmine
   end
 
   def issue id
-    get("#{config.url}/issues/#{id}.json?key=#{config.apikey}")
+    get("#{config.url}/issues/#{id}.json?key=#{config.apikey}").issue
   end
   def issues
     get("#{config.url}/issues.json?key=#{config.apikey}")

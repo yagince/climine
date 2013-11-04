@@ -1,0 +1,11 @@
+
+[<%= issue.status.name %>] #<%= issue.id %> <%= issue.subject %>
+----------------------------------------------------------------------------------------
+[PROJECT ] <%= issue.project.name %>
+[created ] <%= Time.parse(issue.created_on).localtime.strftime("%Y-%m-%d %H:%M:%S") %>
+[Author  ] <%= issue.author.name %>
+[Assigned] <%= issue.assigned_to ? issue.assigned_to.name : "Unassigned" %>
+
+<%= issue.description %>
+----------------------------------------------------------------------------------------
+
