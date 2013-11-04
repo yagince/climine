@@ -10,11 +10,11 @@ class Climine::Redmine
     @config = config
   end
 
-  def issue id
-    get("#{config.url}/issues/#{id}.json?key=#{config.apikey}").issue
+  def issue id, query={}
+    get(build_url("/issues/#{id}.json", query)).issue
   end
-  def issues
-    get("#{config.url}/issues.json?key=#{config.apikey}")
+  def issues query={}
+    get(build_url("/issues.json", query))
   end
 
   private
@@ -27,5 +27,11 @@ class Climine::Redmine
              { error: true }
            end
     Hashie::Mash.new json
+  end
+
+  def build_url path, query
+    query[:key] = config.apikey
+    params = query.map{|(key, value)| "#{key}=#{value}"}.join("&")
+    "#{config.url}#{path}?#{params}"
   end
 end
