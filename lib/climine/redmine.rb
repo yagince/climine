@@ -11,7 +11,7 @@ class Climine::Redmine
   end
 
   def issue id, query={}
-    get(build_url("/issues/#{id}.json", query)).issue
+    get(build_url("/issues/#{id}.json", query))
   end
   def issues query={}
     get(build_url("/issues.json", query))

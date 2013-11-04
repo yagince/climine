@@ -15,11 +15,9 @@ module Climine::Command
         option :project_id, type: :numeric, aliases: '-p', banner: "PROJECT_ID", desc: "id of RedmineProject (default: all project)"
         def issue(id=nil)
           if id
-            issue = redmine.issue(id)
-            puts Climine::Template.build(Climine::Template.issue).result(binding)
+            render :issue, redmine.issue(id)
           else
-            res = redmine.issues(options.to_hash)
-            puts Climine::Template.build(Climine::Template.issues).result(binding)
+            render :issues, redmine.issues(options.to_hash)
           end
         end
 

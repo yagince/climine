@@ -19,5 +19,13 @@ class Climine::CLI < Thor
     def redmine
       @redmine ||= Climine::Redmine.new(Climine::Config.new)
     end
+    def render template_name, response
+      unless response.error
+        res = response
+        puts Climine::Template.build(Climine::Template.send(template_name)).result(binding)
+      else
+        puts "Error"
+      end
+    end
   }
 end
