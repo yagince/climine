@@ -12,10 +12,13 @@ module Climine::Command
 
         desc "issue [TICKET_NO]", "get Redmine Issues."
         def issue(id=nil)
-          erb = ERB.new(Climine::Template.issue)
-          (id ? [redmine.issue(id)] : redmine.issues.issues).each {|issue|
-            puts erb.result(binding) unless issue.error
-          }
+          if id
+            issue = redmine.issue(id)
+            puts Climine::Template.build(Climine::Template.issue).result(binding)
+          else
+            res = redmine.issues
+            puts Climine::Template.build(Climine::Template.issues).result(binding)
+          end
         end
 
       }
