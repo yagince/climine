@@ -3,7 +3,6 @@ require "uri"
 require "climine/template"
 require "erb"
 require "time"
-require "pp"
 
 module Climine::Command
   module Issue
