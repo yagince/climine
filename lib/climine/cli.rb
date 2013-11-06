@@ -1,10 +1,11 @@
-require 'thor'
-require 'climine/redmine'
-require 'climine/config'
-require 'climine/template'
-require 'climine/command/config'
-require 'climine/command/issue'
-require 'climine/command/user'
+require "pp"
+require "thor"
+require "climine/redmine"
+require "climine/config"
+require "climine/template"
+require "climine/command/config"
+require "climine/command/issue"
+require "climine/command/user"
 
 class Climine::CLI < Thor
   include Climine::Command::Config
@@ -28,10 +29,10 @@ class Climine::CLI < Thor
           res = response
           puts Climine::Template.build(Climine::Template.send(template_name)).result(binding)
         else
-          puts response
+          pp response
         end
       else
-        puts "Error"
+        say "-- Error or NotFound", :red
       end
     end
   }
