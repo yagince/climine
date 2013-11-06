@@ -1,4 +1,5 @@
 require "pp"
+require "time"
 require "thor"
 require "climine/redmine"
 require "climine/config"
@@ -20,9 +21,10 @@ class Climine::CLI < Thor
     end
     def render template_name, response
       unless response.error
-        if Climine::Template.respond_to?(template_name)
+        template = Climine::Template.new(template_name)
+        if template.exist?
           res = response
-          puts Climine::Template.build(Climine::Template.send(template_name)).result(binding)
+          puts template.build.result(binding)
         else
           pp response
         end

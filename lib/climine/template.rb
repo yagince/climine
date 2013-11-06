@@ -1,32 +1,39 @@
 require "erb"
 
 class Climine::Template
+
+  def initialize name
+    @name = name
+  end
+
+  def exist?
+    File.exist?(self.class.file_path(@name))
+  end
+
+  def build
+    self.class.build load
+  end
+
+  private
+  def load
+    File.read(self.class.file_path(@name))
+  end
+
   class << self
-    def issue
-      self.load(:issue)
-    end
-    def issues
-      self.load(:issues)
-    end
-    def user
-      self.load(:user)
-    end
-    def users
-      self.load(:users)
-    end
-    def project
-      self.load(:project)
-    end
-    def projects
-      self.load(:projects)
+    def exist? name
+      File.exist?(self.file_path(name))
     end
 
     def load name
-      File.read("#{File.expand_path(File.dirname(__FILE__))}/template/#{name}.erb")
+      File.read(self.file_path(name))
     end
 
     def build template
       ERB.new(template, nil, "-")
+    end
+
+    def file_path name
+      "#{File.expand_path(File.dirname(__FILE__))}/template/#{name}.erb"
     end
   end
 end
