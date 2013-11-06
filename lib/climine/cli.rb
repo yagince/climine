@@ -1,6 +1,7 @@
 require 'thor'
 require 'climine/redmine'
 require 'climine/config'
+require 'climine/template'
 require 'climine/command/config'
 require 'climine/command/issue'
 

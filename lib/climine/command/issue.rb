@@ -1,9 +1,3 @@
-require "net/http"
-require "uri"
-require "climine/template"
-require "erb"
-require "time"
-
 module Climine::Command
   module Issue
     def self.included base
