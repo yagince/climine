@@ -12,13 +12,6 @@ class Climine::CLI < Thor
   include Climine::Command::Issue
   include Climine::Command::User
 
-  desc "hello NAME", "say hello to NAME"
-  def hello(name)
-    puts "Hello #{name}"
-    puts Climine::Config.new.url
-    puts Climine::Config.new.apikey
-  end
-
   no_commands {
     def redmine
       @redmine ||= Climine::Redmine.new(Climine::Config.new)
