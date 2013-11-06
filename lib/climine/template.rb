@@ -8,6 +8,12 @@ class Climine::Template
     def issues
       self.load(:issues)
     end
+    def user
+      self.load(:user)
+    end
+    def users
+      self.load(:users)
+    end
 
     def load name
       File.read("#{File.expand_path(File.dirname(__FILE__))}/template/#{name}.erb")

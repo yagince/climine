@@ -1,0 +1,8 @@
+TOTAL : <%= res.total_count %>
+OFFSET: <%= res.offset %>
+LIMIT : <%= res.limit %>
+
+<% res.users.sort{|a, b| a.id.to_i - b.id.to_i }.each{|user| -%>
+<%= user.id %> : <%= user.login %> [<%= user.firstname %> <%= user.lastname %>] <%= user.mail %>
+<% } -%>
+
