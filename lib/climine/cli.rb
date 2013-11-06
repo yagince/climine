@@ -6,11 +6,13 @@ require "climine/template"
 require "climine/command/config"
 require "climine/command/issue"
 require "climine/command/user"
+require "climine/command/project"
 
 class Climine::CLI < Thor
   include Climine::Command::Config
   include Climine::Command::Issue
   include Climine::Command::User
+  include Climine::Command::Project
 
   no_commands {
     def redmine

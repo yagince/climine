@@ -1,0 +1,7 @@
+TOTAL : <%= res.total_count %>
+OFFSET: <%= res.offset %>
+LIMIT : <%= res.limit %>
+
+<% res.projects.sort{|a,b| a.id.to_i - b.id.to_i}.each{|project| -%>
+<%= project.id %> : <%= project.name %>
+<% } -%>

@@ -22,6 +22,12 @@ class Climine::Redmine
   def users query={}
     get(build_url("/users.json", query))
   end
+  def project id, query={}
+    get(build_url("/projects/#{id}.json", query))
+  end
+  def projects query={}
+    get(build_url("/projects.json", query))
+  end
 
   private
   def get url
