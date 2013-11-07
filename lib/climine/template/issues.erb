@@ -1,5 +1,5 @@
 <% res.issues.each{|issue| -%>
-#<%= issue.id %> [<%= issue.project.name %>][<%= issue.status.name %>] <%= issue.subject %>
+( <%= Time.parse(issue.updated_on).strftime("%Y-%m-%d %H:%M:%S") %> ) #<%= issue.id %> [<%= issue.project.name %>][<%= issue.status.name %>] <%= issue.subject %>  
 <% } -%>
 
 TOTAL : <%= res.total_count %>
