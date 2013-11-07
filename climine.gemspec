@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["straitwalk@gmail.com"]
   spec.description   = %q{CLI for Redmine}
   spec.summary       = %q{CLI for Redmine}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/yagince/climine"
   spec.license       = "MIT"
 
   spec.files         = Dir.glob("**/*").select{|path| !(path =~ /^doc|^pkg/) }
