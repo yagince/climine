@@ -5,7 +5,8 @@ module Climine::Command
     def self.included base
       base.class_eval {
 
-        desc "issue [TICKET_NO]", "get Redmine Issues."
+        desc "issue [TICKET_NO]", "get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues"
+        option :sort, type: :string, aliases: '-s', banner: "SORT_KEYS", desc: "default asc. ex) 'id,category:desc,updated_on'"
         option :limit, type: :numeric, aliases: '-l', banner: "LIMIT", desc: "limit of search result (default: 25)", deafult: 25
         option :offset, type: :numeric, aliases: '-o', banner: "OFFSET", desc: "page of seach result(0 origin) (default: 0)"
         option :project_id, type: :numeric, aliases: '-p', banner: "PROJECT_ID", desc: "id of RedmineProject ( Please search by `climine project` ) (default: all project)"
