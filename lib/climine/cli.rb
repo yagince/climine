@@ -1,6 +1,9 @@
 require "pp"
 require "time"
 require "thor"
+require "hirb"
+require "hirb-unicode"
+
 require "climine/redmine"
 require "climine/config"
 require "climine/template"
@@ -9,6 +12,7 @@ require "climine/command/issue"
 require "climine/command/user"
 require "climine/command/project"
 require "climine/command/tracker"
+require "climine/command/status"
 
 class Climine::CLI < Thor
   include Climine::Command::Config
@@ -16,6 +20,7 @@ class Climine::CLI < Thor
   include Climine::Command::User
   include Climine::Command::Project
   include Climine::Command::Tracker
+  include Climine::Command::Status
 
   no_commands {
     def redmine
@@ -33,6 +38,9 @@ class Climine::CLI < Thor
       else
         say "-- Error or NotFound", :red
       end
+    end
+    def render_table data
+      puts Hirb::Helpers::AutoTable.render(data)
     end
   }
 end

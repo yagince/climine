@@ -31,6 +31,9 @@ class Climine::Redmine
   def trackers
     get(build_url("/trackers.json"))
   end
+  def statuses
+    get(build_url("/issue_statuses.json"))
+  end
 
   private
   def get url

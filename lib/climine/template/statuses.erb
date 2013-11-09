@@ -1,0 +1,3 @@
+<% res.issue_statuses.sort{|a,b| a.id - b.id }.each{|status| -%>
+<%= status.id %> : <%= status.name %><% if status.is_default %> (default)<% end %><% if status.is_closed %> (closed)<% end %>
+<% } -%>
