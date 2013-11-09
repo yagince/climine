@@ -21,26 +21,40 @@ module Climine::Command
     end
 
     desc "new", "create Issue"
+    option :project, type: :numeric, aliases: '-p', banner: "PROJECT_ID", desc: "project_id (search by `project` command)"
+    option :tracker, type: :numeric, aliases: '-t', banner: "TRACKER_ID", desc: "tracker_id (search by `tracker` command)"
+    option :status, type: :numeric, aliases: '-s', banner: "STATUS_ID", desc: "status_id (search by `status` command)"
+    option :user, type: :numeric, aliases: '-u', banner: "USER_ID", desc: "user_id (search by `user` command)"
+    option :subject, type: :string, banner: "SUBJECT", desc: "ticket title"
+    option :desc, type: :string, banner: "DESCRIPTION", desc: "ticket description"
     def new
       # project
-      projects = sort_by_id redmine.projects.projects
-      projects.each{|project| puts "#{project.id} : #{project.name}" }
-      project_id = ask("Which project?", limited_to: projects.map{|project| project.id.to_s})
+      unless project_id = options["project"]
+        projects = sort_by_id redmine.projects.projects
+        projects.each{|project| puts "#{project.id} : #{project.name}" }
+        project_id = ask("Which project?", limited_to: projects.map{|project| project.id.to_s})
+      end
    
       # tracker
-      trackers = sort_by_id redmine.trackers.trackers
-      trackers.each{|tracker| puts "#{tracker.id} : #{tracker.name}" }
-      tracker_id = ask("Which tracker?", limited_to: trackers.map{|tracker| tracker.id.to_s})
+      unless tracker_id = options["tracker"]
+        trackers = sort_by_id redmine.trackers.trackers
+        trackers.each{|tracker| puts "#{tracker.id} : #{tracker.name}" }
+        tracker_id = ask("Which tracker?", limited_to: trackers.map{|tracker| tracker.id.to_s})
+      end
    
       # status
-      statuses = sort_by_id redmine.statuses.issue_statuses
-      statuses.each{|status| puts "#{status.id} : #{status.name}" }
-      status_id = ask("Which status? (empty is default)")
+      unless status_id = options["status"]
+        statuses = sort_by_id redmine.statuses.issue_statuses
+        statuses.each{|status| puts "#{status.id} : #{status.name}" }
+        status_id = ask("Which status? (empty is default)")
+      end
    
       # assigned user
-      members = sort_by_id redmine.members(project_id).memberships
-      members.each{|member| puts "#{member.user.id} : #{member.user.name}"}
-      user_id = ask("Who do you assigned?")
+      unless user_id = options["user"]
+        members = sort_by_id redmine.members(project_id).memberships
+        members.each{|member| puts "#{member.user.id} : #{member.user.name}"}
+        user_id = ask("Who do you assigned?")
+      end
    
       # subject
       subject = ask_not_empty("subject > ")
