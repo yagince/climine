@@ -1,0 +1,3 @@
+<% res.trackers.sort{|a,b| a.id - b.id }.each{|tracker| -%>
+<%= tracker.id %> : <%= tracker.name %>
+<% } -%>

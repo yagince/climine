@@ -28,6 +28,9 @@ class Climine::Redmine
   def projects query={}
     get(build_url("/projects.json", query))
   end
+  def trackers
+    get(build_url("/trackers.json"))
+  end
 
   private
   def get url
@@ -41,7 +44,7 @@ class Climine::Redmine
     Hashie::Mash.new json
   end
 
-  def build_url path, query
+  def build_url path, query={}
     query[:key] = config.apikey
     params = query.map{|(key, value)| "#{key}=#{URI.encode(value)}"}.join("&")
     "#{config.url}#{path}?#{params}"

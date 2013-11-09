@@ -8,12 +8,14 @@ require "climine/command/config"
 require "climine/command/issue"
 require "climine/command/user"
 require "climine/command/project"
+require "climine/command/tracker"
 
 class Climine::CLI < Thor
   include Climine::Command::Config
   include Climine::Command::Issue
   include Climine::Command::User
   include Climine::Command::Project
+  include Climine::Command::Tracker
 
   no_commands {
     def redmine
