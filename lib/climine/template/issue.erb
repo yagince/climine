@@ -1,5 +1,5 @@
 <% issue = res.issue %>
-[<%= issue.status.name %>] #<%= issue.id %> <%= issue.subject %>
+<<<%= issue.tracker.name %>>> [<%= issue.status.name %>] #<%= issue.id %> <%= issue.subject %>
 ----------------------------------------------------------------------------------------
 [PROJECT ] <%= issue.project.name %>
 [created ] <%= Time.parse(issue.created_on).localtime.strftime("%Y-%m-%d %H:%M:%S") %>
