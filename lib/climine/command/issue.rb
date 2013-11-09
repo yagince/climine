@@ -22,6 +22,49 @@ module Climine::Command
           end
         end
 
+        desc "issue_new", "new Issue"
+        def issue_new
+          # project
+          projects = sort_by_id redmine.projects.projects
+          projects.each{|project| puts "#{project.id} : #{project.name}" }
+          project_id = ask("Which project?", limited_to: projects.map{|project| project.id.to_s})
+
+          # tracker
+          trackers = sort_by_id redmine.trackers.trackers
+          trackers.each{|tracker| puts "#{tracker.id} : #{tracker.name}" }
+          tracker_id = ask("Which tracker?", limited_to: trackers.map{|tracker| tracker.id.to_s})
+
+          # status
+          statuses = sort_by_id redmine.statuses.issue_statuses
+          statuses.each{|status| puts "#{status.id} : #{status.name}" }
+          status_id = ask("Which status? (empty is default)")
+
+          # assigned user
+          members = sort_by_id redmine.members(project_id).memberships
+          members.each{|member| puts "#{member.user.id} : #{member.user.name}"}
+          user_id = ask("Who do you assigned?")
+
+          # subject
+          subject = ask_not_empty("subject > ")
+          # description
+          description = ask_not_empty("description > ")
+
+          res = redmine.create_issue(
+            project_id: project_id,
+            tracker_id: tracker_id,
+            status_id: status_id,
+            assigned_to_id: user_id,
+            subject: subject,
+            description: description
+          )
+
+          unless res.error
+            render :issue, res
+          else
+            say "Error! (Issue was not created)", :red
+          end
+        end
+
         no_commands {
           def before_weeek_to_update_date option
             if weeks = option["before_week"]
@@ -29,6 +72,16 @@ module Climine::Command
               option.delete "before_week"
             end
             option
+          end
+
+          def ask_not_empty statement
+            answer = nil
+            until answer
+              answer = ask(statement)
+              answer = answer.empty? ? nil : answer
+              say "! #{statement} is must not be empty", :magenta unless answer
+            end
+            answer
           end
         }
 

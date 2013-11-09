@@ -42,5 +42,8 @@ class Climine::CLI < Thor
     def render_table data
       puts Hirb::Helpers::AutoTable.render(data)
     end
+    def sort_by_id ary
+      ary.sort{|a,b| a.id - b.id}
+    end
   }
 end
