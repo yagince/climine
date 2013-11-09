@@ -18,3 +18,5 @@ tmp
 
 vendor/bundle
 config.yml
+
+templates
