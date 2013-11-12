@@ -53,9 +53,11 @@ $ climine help [COMMAND]
 
 ### Issues
 
+#### get issues
+
 ```
 Usage:
-  climine issue [TICKET_NO]
+  climine issue get [TICKET_NO]
 
 Options:
   -s, [--sort=SORT_KEYS]                # default asc. ex) 'id,category:desc,updated_on'
@@ -68,6 +70,29 @@ Options:
   -w, [--before-week=WEEKS]             # search tickets that has been updated in the last X weeks
 
 get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues
+```
+
+You can be rendered using the your own ERB template file.
+
+```
+$ climine issue get -t [template_path]
+```
+
+#### create issue
+
+```
+Usage:
+  climine new
+
+Options:
+  -p, [--project=PROJECT_ID]  # project_id (search by `project` command)
+  -t, [--tracker=TRACKER_ID]  # tracker_id (search by `tracker` command)
+  -s, [--status=STATUS_ID]    # status_id (search by `status` command)
+  -u, [--user=USER_ID]        # user_id (search by `user` command)
+      [--subject=SUBJECT]     # ticket title
+      [--desc=DESCRIPTION]    # ticket description
+
+create Issue
 ```
 
 ### Users
@@ -85,6 +110,32 @@ Options:
 ```
 Usage:
   climine project [PROJECT_ID]
+```
+
+### Ticket Statauses
+
+```
+Usage:
+  climine status
+```
+
+### Ticket Trackers
+
+```
+Usage:
+  climine tracker
+```
+
+### Project Members
+
+```
+Usage:
+  climine get -p, --project-id=PROJECT_ID
+
+Options:
+  -p, --project-id=PROJECT_ID  # see) http://www.redmine.org/projects/redmine/wiki/Rest_Memberships#GET
+
+get Project Members
 ```
 
 ## Contributing
