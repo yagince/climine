@@ -14,6 +14,7 @@ require "climine/command/user"
 require "climine/command/project"
 require "climine/command/tracker"
 require "climine/command/status"
+require "climine/command/member"
 
 class Climine::CLI < Thor
   register Climine::Command::Config, :init, "init", "intialize config"
@@ -22,4 +23,5 @@ class Climine::CLI < Thor
   register Climine::Command::Project, :project, "project [COMMAND]", "subcommands for project"
   register Climine::Command::Tracker, :tracker, "tracker [COMMAND]", "subcommands for tracker"
   register Climine::Command::Status, :status, "status [COMMAND]", "subcommands for status"
+  register Climine::Command::Member, :member, "member [COMMAND]", "subcommands for member"
 end

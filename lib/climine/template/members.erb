@@ -1,0 +1,7 @@
+TOTAL : <%= res.total_count %>
+OFFSET: <%= res.offset %>
+LIMIT : <%= res.limit %>
+
+<% res.memberships.select{ |m| m.user }.sort{|a,b| a.user.id.to_i - b.user.id.to_i}.each{|member| -%>
+[ <%= member.project.name %> ] <%= member.user.id %> : <%= member.user.name %>
+<% } -%>

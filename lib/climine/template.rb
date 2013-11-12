@@ -4,7 +4,7 @@ class Climine::Template
 
   def initialize name
     internal_file_path = self.class.file_path(name)
-    @path = File.exist?(internal_file_path) ? internal_file_path : name
+    @path = File.exist?(internal_file_path) ? internal_file_path : name.to_s
   end
 
   def exist?
