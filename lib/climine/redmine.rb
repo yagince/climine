@@ -73,7 +73,7 @@ class Climine::Redmine
 
   def build_url path, query={}
     query[:key] = config.apikey
-    params = query.map{|(key, value)| "#{key}=#{URI.encode(value)}"}.join("&")
+    params = query.map{|(key, value)| "#{key}=#{URI.encode(value.to_s)}"}.join("&")
     "#{config.url}#{path}?#{params}"
   end
 end
