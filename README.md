@@ -68,6 +68,7 @@ Options:
   -c, [--created-on=CREATED_DATE]       # ex) >=2013-10-01, >2013-10-01, <2013-10-01, 2013-10-01
   -r, [--updated-on=LAST_UPDATED_DATE]  # ex) >=2013-10-01, >2013-10-01, <2013-10-01, 2013-10-01
   -w, [--before-week=WEEKS]             # search tickets that has been updated in the last X weeks
+  -t, [--template=TEMPLATE_PATH]        # rendering by given template
 
 get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues
 ```
