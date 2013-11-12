@@ -1,6 +1,6 @@
 module Climine::Command
   class Base < Thor
-    
+
     no_commands {
       def redmine
         @redmine ||= Climine::Redmine.new(Climine::Config.new)
