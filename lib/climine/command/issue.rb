@@ -8,6 +8,7 @@ module Climine::Command
     option :limit, type: :numeric, aliases: '-l', banner: "LIMIT", desc: "limit of search result (default: 25)", deafult: 25
     option :offset, type: :numeric, aliases: '-o', banner: "OFFSET", desc: "page of seach result(0 origin) (default: 0)"
     option :project_id, type: :numeric, aliases: '-p', banner: "PROJECT_ID", desc: "id of RedmineProject ( Please search by `climine project` ) (default: all project)"
+    option :status_id, type: :numeric, banner: "STATUS_ID", desc: "id of issue status. ( Please search by `climine status` ) (default: all status)", default: "*"
     option :assigned_to_id, type: :numeric, aliases: '-u', banner: "USER_ID", desc: "ID of the user being assigned ( Please search by `climine user` )"
     option :created_on, type: :string, aliases: '-c', banner: "CREATED_DATE", desc: "ex) >=2013-10-01, >2013-10-01, <2013-10-01, 2013-10-01"
     option :updated_on, type: :string, aliases: '-r', banner: "LAST_UPDATED_DATE", desc: "ex) >=2013-10-01, >2013-10-01, <2013-10-01, 2013-10-01"
