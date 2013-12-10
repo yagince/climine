@@ -2,11 +2,10 @@ require "hashie"
 
 module Climine::Command
   class Status < Base
-    default_command :status
 
-    desc "status", "get Redmine IssueStatuses."
+    desc "list", "get Redmine IssueStatuses."
     option :table, type: :boolean, aliases: '-t', desc: "default asc. ex) 'id,category:desc,updated_on'", default: false
-    def status
+    def list
       unless options[:table]
         render :statuses, redmine.statuses
       else

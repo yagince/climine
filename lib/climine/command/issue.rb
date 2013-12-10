@@ -3,7 +3,7 @@ require "date"
 module Climine::Command
   class Issue < Base
 
-    desc "get [TICKET_NO]", "get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues"
+    desc "list [TICKET_NO]", "get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues"
     option :sort, type: :string, aliases: '-s', banner: "SORT_KEYS", desc: "default asc. ex) 'id,category:desc,updated_on'"
     option :limit, type: :numeric, aliases: '-l', banner: "LIMIT", desc: "limit of search result (default: 25)", deafult: 25
     option :offset, type: :numeric, aliases: '-o', banner: "OFFSET", desc: "page of seach result(0 origin) (default: 0)"
@@ -14,12 +14,15 @@ module Climine::Command
     option :updated_on, type: :string, aliases: '-r', banner: "LAST_UPDATED_DATE", desc: "ex) >=2013-10-01, >2013-10-01, <2013-10-01, 2013-10-01"
     option :before_week, type: :numeric, aliases: '-w', banner: "WEEKS", desc: "search tickets that has been updated in the last X weeks"
     option :template, type: :string, aliases: '-t', banner: "TEMPLATE_PATH", desc: "rendering by given template"
+    def list
+      render (options["template"] || :issues), redmine.issues(before_weeek_to_update_date(options.to_hash))
+    end
+
+    desc "get [TICKET_NO]", "get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues"
+    option :template, type: :string, aliases: '-t', banner: "TEMPLATE_PATH", desc: "rendering by given template"
     def get(id=nil)
-      if id
-        render (options["template"] || :issue), redmine.issue(id)
-      else
-        render (options["template"] || :issues), redmine.issues(before_weeek_to_update_date(options.to_hash))
-      end
+      say("required ticket number!", :red) unless id
+      render (options["template"] || :issue), redmine.issue(id)
     end
 
     desc "new", "create Issue"
