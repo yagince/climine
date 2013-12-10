@@ -53,17 +53,19 @@ $ climine help [COMMAND]
 
 ### Issues
 
-#### get issues
+#### get issue list
 
 ```
 Usage:
-  climine issue get [TICKET_NO]
+  climine list [TICKET_NO]
 
 Options:
   -s, [--sort=SORT_KEYS]                # default asc. ex) 'id,category:desc,updated_on'
   -l, [--limit=LIMIT]                   # limit of search result (default: 25)
   -o, [--offset=OFFSET]                 # page of seach result(0 origin) (default: 0)
   -p, [--project-id=PROJECT_ID]         # id of RedmineProject ( Please search by `climine project` ) (default: all project)
+      [--status-id=STATUS_ID]           # id of issue status. ( Please search by `climine status` ) (default: all status)
+                                        # Default: *
   -u, [--assigned-to-id=USER_ID]        # ID of the user being assigned ( Please search by `climine user` )
   -c, [--created-on=CREATED_DATE]       # ex) >=2013-10-01, >2013-10-01, <2013-10-01, 2013-10-01
   -r, [--updated-on=LAST_UPDATED_DATE]  # ex) >=2013-10-01, >2013-10-01, <2013-10-01, 2013-10-01
@@ -73,10 +75,22 @@ Options:
 get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues
 ```
 
+#### get issue
+
+```
+Usage:
+  climine get [TICKET_NO]
+
+Options:
+  -t, [--template=TEMPLATE_PATH]  # rendering by given template
+
+get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues
+```
+
 You can be rendered using the your own ERB template file.
 
 ```
-$ climine issue get -t [template_path]
+$ climine issue (get|issue) -t [template_path]
 ```
 
 #### create issue
@@ -100,38 +114,61 @@ create Issue
 
 ```
 Usage:
-  climine user [ID]
+  climine user list
 
 Options:
   -n, [--name=NAME]  # filter users on their login, firstname, lastname and mail
+```
+
+```
+Usage:
+  climine user get [ID]
+
+get Redmine User
 ```
 
 ### Projects
 
 ```
 Usage:
-  climine project [PROJECT_ID]
+  climine project list
+
+get Redmine Projects.
+```
+
+```
+Usage:
+  climine project get [PROJECT_ID]
+
+get Redmine Project.
 ```
 
 ### Ticket Statauses
 
 ```
 Usage:
-  climine status
+  climine status list
+
+Options:
+  -t, [--table]  # default asc. ex) 'id,category:desc,updated_on'
+
+get Redmine IssueStatuses.
 ```
 
 ### Ticket Trackers
 
 ```
 Usage:
-  climine tracker
+  climine tracker list
+
+get Redmine Trackers.
 ```
 
 ### Project Members
 
 ```
 Usage:
-  climine get -p, --project-id=PROJECT_ID
+  climine member list -p, --project-id=PROJECT_ID
 
 Options:
   -p, --project-id=PROJECT_ID  # see) http://www.redmine.org/projects/redmine/wiki/Rest_Memberships#GET
