@@ -23,12 +23,13 @@ Or install it yourself as:
 create `config.yml`
 
 ```
-$ climine init -k xxxx -u http://xxxx.xxx.xx/
+$ climine init -k xxxx -u http://xxxx.xxx.xx/ -e `which emacs`
 ```
 
 ```config.yml
 url: http://xxxx.xxx.xx/
 apikey: xxxx
+editor: /path/to/emacs
 ```
 
 ### Help
