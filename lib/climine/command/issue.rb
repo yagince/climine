@@ -1,4 +1,5 @@
 require "date"
+require 'tempfile'
 
 module Climine::Command
   class Issue < Base
@@ -61,18 +62,13 @@ module Climine::Command
         user_id = ask("Who do you assigned?")
       end
    
-      # subject
-      subject = ask_not_empty("subject > ")
-      # description
-      description = ask_not_empty("description > ")
-   
       res = redmine.create_issue(
         project_id: project_id,
         tracker_id: tracker_id,
         status_id: status_id,
         assigned_to_id: user_id,
-        subject: subject,
-        description: description
+        subject: ask_not_empty("subject > ").force_encoding('utf-8'),
+        description: ask_description
       )
    
       unless res.error
@@ -99,6 +95,19 @@ module Climine::Command
           say "! #{statement} is must not be empty", :magenta unless answer
         end
         answer
+      end
+
+      def ask_description
+        editor = config.editor
+        if editor.nil? or editor.empty?
+          description = ask_not_empty("description > ")
+        else
+          tmp = Tempfile.new('description_tmp')
+          system "#{editor} #{tmp.path}"
+          description = open(tmp.path){|f| f.read.force_encoding('utf-8') }
+          tmp.unlink
+        end
+        description
       end
     }
   end

@@ -2,8 +2,11 @@ module Climine::Command
   class Base < Thor
 
     no_commands {
+      def config
+        @config ||= Climine::Config.new
+      end
       def redmine
-        @redmine ||= Climine::Redmine.new(Climine::Config.new)
+        @redmine ||= Climine::Redmine.new(config)
       end
       def render template_name, response
         unless response.error
