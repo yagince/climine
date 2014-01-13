@@ -80,7 +80,7 @@ get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issue
 
 ```
 Usage:
-  climine get [TICKET_NO]
+  climine issue get [TICKET_NO]
 
 Options:
   -t, [--template=TEMPLATE_PATH]  # rendering by given template
@@ -91,14 +91,14 @@ get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issue
 You can be rendered using the your own ERB template file.
 
 ```
-$ climine issue (get|issue) -t [template_path]
+$ climine issue (get|list) -t [template_path]
 ```
 
 #### create issue
 
 ```
 Usage:
-  climine new
+  climine issue new
 
 Options:
   -p, [--project=PROJECT_ID]  # project_id (search by `project` command)
