@@ -2,7 +2,7 @@ require 'erb'
 
 module Climine::Command
   class Config < Base
-    CONFIG = "config.yml"
+    CONFIG = "climine.yml"
     TEMPLATE = <<-ERB
 url: <%= options[:url] %>
 apikey: <%= options[:key] %>
@@ -13,7 +13,7 @@ editor: <%= options[:editor] %>
 
     default_command :init
 
-    desc "init ", "initialize config.yml"
+    desc "init ", "initialize climine.yml"
     option :url, required: true, type: :string, aliases: '-u', banner: "RedmineURL", desc: "Your Redmine's URL"
     option :key, required: true, type: :string, aliases: '-k', banner: "API-Access-Key", desc: "Your API Access Key"
     option :editor, required: false, type: :string, aliases: '-e', banner: "Editor command or path", desc: "Your favorite editor ex) emacs or vim or /usr/bin/emacs etc..."
