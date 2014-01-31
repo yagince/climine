@@ -18,6 +18,8 @@ editor: <%= options[:editor] %>
     option :key, required: true, type: :string, aliases: '-k', banner: "API-Access-Key", desc: "Your API Access Key"
     option :editor, required: false, type: :string, aliases: '-e', banner: "Editor command or path", desc: "Your favorite editor ex) emacs or vim or /usr/bin/emacs etc..."
     def init
+      return if File.exist?(CONFIG) and !yes?("Overwrite? [#{CONFIG}] (y/n)", :green)
+
       open(CONFIG, 'w'){|file| file.write(ERB.new(TEMPLATE, nil, "-").result(binding)) }
       puts "create [ #{File.expand_path(CONFIG)} ]"
     end
