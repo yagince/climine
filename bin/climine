@@ -1,4 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'climine'
+
+Signal.trap(:INT) {
+  puts "\nbye..."
+  exit(0)
+}
+
 Climine::CLI.start(ARGV)
