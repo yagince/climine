@@ -18,5 +18,6 @@ tmp
 
 vendor/bundle
 config.yml
+climine.yml
 
 templates
