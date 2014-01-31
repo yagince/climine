@@ -26,10 +26,16 @@ create `config.yml`
 $ climine init -k xxxx -u http://xxxx.xxx.xx/ -e `which emacs`
 ```
 
-```config.yml
+```climine.yml
 url: http://xxxx.xxx.xx/
 apikey: xxxx
 editor: /path/to/emacs
+```
+
+Path of the configuration file can also be specified in the environment variable.
+
+```
+export CLIMINE_CONF=path/to/climine.yml
 ```
 
 ### Help
