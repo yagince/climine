@@ -97,6 +97,18 @@ module Climine::Command
       render :issue, redmine.issue(id)
     end
 
+    desc "close [TICKET_NO]", "update status of issue to ID:5."
+    def close(id=nil)
+      say("required ticket number!", :red) and return unless id
+      redmine.update_issue id, {status_id: 5}
+      render :issue, redmine.issue(id)
+    end
+
+    desc "finish [TICKET_NO]", "alias for close"
+    def finish(id=nil)
+      close(id)
+    end
+
     no_commands {
       def before_weeek_to_update_date option
         if weeks = option["before_week"]
