@@ -2,6 +2,8 @@
 
 CLI for Redmine
 
+[![Gem Version](https://badge.fury.io/rb/climine.png)](http://badge.fury.io/rb/climine)
+
 ## Installation
 
 Add this line to your application's Gemfile:
