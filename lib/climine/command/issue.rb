@@ -109,6 +109,13 @@ module Climine::Command
       close(id)
     end
 
+    desc "reject [TICKET_NO]", "update status of issue to ID:6."
+    def reject(id=nil)
+      say("required ticket number!", :red) and return unless id
+      redmine.update_issue id, {status_id: 6}
+      render :issue, redmine.issue(id)
+    end
+
     no_commands {
       def before_weeek_to_update_date option
         if weeks = option["before_week"]
