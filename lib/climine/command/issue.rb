@@ -78,6 +78,16 @@ module Climine::Command
       end
     end
 
+    desc "update [TICKET_NO]", "update Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Updating-an-issue"
+    option :tracker_id, type: :numeric, aliases: '-t', banner: "TRACKER_ID", desc: "tracker_id (search by `tracker` command)"
+    option :status_id, type: :numeric, aliases: '-s', banner: "STATUS_ID", desc: "status_id (search by `status` command)"
+    option :user_id, type: :numeric, aliases: '-u', banner: "USER_ID", desc: "user_id (search by `user` command)"
+    def update(id=nil)
+      say("required ticket number!", :red) and return unless id
+      redmine.update_issue id, options
+      render :issue, redmine.issue(id)
+    end
+
     no_commands {
       def before_weeek_to_update_date option
         if weeks = option["before_week"]

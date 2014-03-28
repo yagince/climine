@@ -20,6 +20,9 @@ class Climine::Redmine
   def create_issue issue
     post(build_url("/issues.json"), {issue: issue})
   end
+  def update_issue id, issue
+    put(build_url("/issues/#{id}.json"), {issue: issue})
+  end
   def user id, query={}
     get(build_url("/users/#{id}.json", query))
   end
@@ -57,6 +60,24 @@ class Climine::Redmine
     uri = URI(url)
 
     req = Net::HTTP::Post.new uri, initheader = {'Content-Type' =>'application/json'}
+    req.body = content.to_json
+
+    res = Net::HTTP.start(uri.host, uri.port, use_ssl: (uri.scheme == "https")) do |http|
+      http.request req
+    end
+
+    json = case res.code.to_i
+           when 201
+             JSON.parse(res.body)
+           else
+             { error: true }
+           end
+    Hashie::Mash.new json
+  end
+  def put url, content
+    uri = URI(url)
+
+    req = Net::HTTP::Put.new uri, initheader = {'Content-Type' =>'application/json'}
     req.body = content.to_json
 
     res = Net::HTTP.start(uri.host, uri.port, use_ssl: (uri.scheme == "https")) do |http|
