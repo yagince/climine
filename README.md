@@ -117,6 +117,55 @@ Options:
 create Issue
 ```
 
+#### update issue
+
+```
+Usage:
+  climine issue update [TICKET_NO]
+
+Options:
+  -t, [--tracker-id=TRACKER_ID]  # tracker_id (search by `tracker` command)
+  -s, [--status-id=STATUS_ID]    # status_id (search by `status` command)
+  -u, [--user-id=USER_ID]        # user_id (search by `user` command)
+
+update Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Updating-an-issue
+```
+
+#### update issue status
+
+
+```
+Usage:
+  climine issue start [TICKET_NO]
+
+Options:
+  -t, [--tracker-id=TRACKER_ID]  # tracker_id (search by `tracker` command)
+  -u, [--user-id=USER_ID]        # user_id (search by `user` command)
+
+update status of issue to ID:2.
+```
+
+```
+Usage:
+  climine issue close [TICKET_NO]
+
+update status of issue to ID:5.
+```
+
+```
+Usage:
+  climine issue finish [TICKET_NO]
+
+alias for close
+```
+
+```
+Usage:
+  climine issue reject [TICKET_NO]
+
+update status of issue to ID:6.
+```
+
 ### Users
 
 ```
