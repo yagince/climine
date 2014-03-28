@@ -57,27 +57,16 @@ class Climine::Redmine
     Hashie::Mash.new json
   end
   def post url, content
-    uri = URI(url)
-
-    req = Net::HTTP::Post.new uri, initheader = {'Content-Type' =>'application/json'}
-    req.body = content.to_json
-
-    res = Net::HTTP.start(uri.host, uri.port, use_ssl: (uri.scheme == "https")) do |http|
-      http.request req
-    end
-
-    json = case res.code.to_i
-           when 201
-             JSON.parse(res.body)
-           else
-             { error: true }
-           end
-    Hashie::Mash.new json
+    request Net::HTTP::Post, url, content
   end
   def put url, content
+    request Net::HTTP::Put, url, content
+  end
+
+  def request method, url, content
     uri = URI(url)
 
-    req = Net::HTTP::Put.new uri, initheader = {'Content-Type' =>'application/json'}
+    req = method.new uri, initheader = {'Content-Type' =>'application/json'}
     req.body = content.to_json
 
     res = Net::HTTP.start(uri.host, uri.port, use_ssl: (uri.scheme == "https")) do |http|
