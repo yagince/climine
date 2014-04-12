@@ -84,7 +84,10 @@ module Climine::Command
     option :user_id, type: :numeric, aliases: '-u', banner: "USER_ID", desc: "user_id (search by `user` command)"
     def update(id=nil)
       say("required ticket number!", :red) and return unless id
+
+      options[:assigned_to_id] = options.delete(:user_id) if options[:user_id]
       redmine.update_issue id, options
+
       render :issue, redmine.issue(id)
     end
 
@@ -93,7 +96,10 @@ module Climine::Command
     option :user_id, type: :numeric, aliases: '-u', banner: "USER_ID", desc: "user_id (search by `user` command)"
     def start(id=nil)
       say("required ticket number!", :red) and return unless id
-      redmine.update_issue id, options.merge({status_id: 2})
+
+      options[:assigned_to_id] = options.delete(:user_id) if options[:user_id]
+      redmine.update_issue id, options.merge({status_id: 2}) # id:2 is close
+
       render :issue, redmine.issue(id)
     end
 
