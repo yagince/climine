@@ -21,9 +21,18 @@ module Climine::Command
 
     desc "get [TICKET_NO]", "get Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Listing-issues"
     option :template, type: :string, aliases: '-t', banner: "TEMPLATE_PATH", desc: "rendering by given template"
+    option :journals, type: :boolean, aliases: '-j', banner: "true or false", desc: "is include journals"
     def get(id=nil)
       say("required ticket number!", :red) unless id
-      render (options["template"] || :issue), redmine.issue(id)
+      template = options.delete "template"
+
+      redmine_params = {include: []}
+
+      if options.delete "journals"
+        redmine_params[:include] << :journals
+      end
+        
+      render (template || :issue), redmine.issue(id, redmine_params)
     end
 
     desc "new", "create Issue"

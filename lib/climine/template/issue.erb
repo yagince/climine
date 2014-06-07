@@ -8,4 +8,12 @@
 
 <%= issue.description %>
 ----------------------------------------------------------------------------------------
-
+<%- if issue.journals -%>
+< NOTES >
+<%- issue.journals.each_with_index{|journal, i| -%>
+  <%- if journal.notes -%>
+[ #<%= i %> <%= journal.user.name %> ]
+<%= journal.notes %>
+  <%- end -%>
+<%- } -%>
+<%- end -%>
