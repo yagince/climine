@@ -91,6 +91,7 @@ module Climine::Command
     option :tracker_id, type: :numeric, aliases: '-t', banner: "TRACKER_ID", desc: "tracker_id (search by `tracker` command)"
     option :status_id, type: :numeric, aliases: '-s', banner: "STATUS_ID", desc: "status_id (search by `status` command)"
     option :user_id, type: :numeric, aliases: '-u', banner: "USER_ID", desc: "user_id (search by `user` command)"
+    option :notes, type: :string, aliases: '-n', banner: "NOTES", desc: "notes (comment)"
     def update(id=nil)
       say("required ticket number!", :red) and return unless id
 
@@ -98,6 +99,29 @@ module Climine::Command
       redmine.update_issue id, options
 
       render :issue, redmine.issue(id)
+    end
+
+    desc "notes [TICKET_NO] [NOTE]", "post notes Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Updating-an-issue"
+    option :tracker_id, type: :numeric, aliases: '-t', banner: "TRACKER_ID", desc: "tracker_id (search by `tracker` command)"
+    option :status_id, type: :numeric, aliases: '-s', banner: "STATUS_ID", desc: "status_id (search by `status` command)"
+    option :user_id, type: :numeric, aliases: '-u', banner: "USER_ID", desc: "user_id (search by `user` command)"
+    option :notes, type: :string, aliases: '-n', banner: "NOTES", desc: "notes (comment)"
+    def notes(id=nil, notes=nil)
+      say("required ticket number!", :red) and return unless id
+
+      if notes 
+        options[:notes] = notes
+      elsif !options[:notes]
+        options[:notes] = ask_notes
+      end
+
+      if options[:user_id]
+        options[:assigned_to_id] = options.delete(:user_id)
+      end
+
+      redmine.update_issue id, options
+
+      render :issue, redmine.issue(id, { include: [:journals] })
     end
 
     desc "start [TICKET_NO]", "update status of issue to ID:2."
@@ -151,17 +175,26 @@ module Climine::Command
       end
 
       def ask_description
+        ask_by_editor "description"
+      end
+
+      def ask_notes
+        ask_by_editor "notes"
+      end
+
+      def ask_by_editor name
         editor = config.editor
         if editor.nil? or editor.empty?
-          description = ask_not_empty("description > ")
+          value = ask_not_empty("#{name} > ")
         else
-          tmp = Tempfile.new('description_tmp')
+          tmp = Tempfile.new("#{name}_tmp")
           system "#{editor} #{tmp.path}"
-          description = open(tmp.path){|f| f.read.force_encoding('utf-8') }
+          value = open(tmp.path){|f| f.read.force_encoding('utf-8') }
           tmp.unlink
         end
-        description
+        value
       end
+
     }
   end
 end
