@@ -129,8 +129,24 @@ Options:
   -t, [--tracker-id=TRACKER_ID]  # tracker_id (search by `tracker` command)
   -s, [--status-id=STATUS_ID]    # status_id (search by `status` command)
   -u, [--user-id=USER_ID]        # user_id (search by `user` command)
+  -n, [--notes=NOTES]            # notes (comment)
 
 update Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Updating-an-issue
+```
+
+#### post issue notes
+
+```
+Usage:
+  climine issue notes [TICKET_NO] [NOTE]
+
+Options:
+  -t, [--tracker-id=TRACKER_ID]  # tracker_id (search by `tracker` command)
+  -s, [--status-id=STATUS_ID]    # status_id (search by `status` command)
+  -u, [--user-id=USER_ID]        # user_id (search by `user` command)
+  -n, [--notes=NOTES]            # notes (comment)
+
+post notes Redmine Issues. see) http://www.redmine.org/projects/redmine/wiki/Rest_Issues#Updating-an-issue
 ```
 
 #### update issue status
