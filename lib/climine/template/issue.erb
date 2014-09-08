@@ -12,7 +12,7 @@
 < NOTES >
 <%- issue.journals.each_with_index{|journal, i| -%>
   <%- if journal.notes -%>
-[ #<%= i %> <%= journal.user.name %> ]
+[ #<%= i+1 %> <%= journal.user.name %> ]
 <%= journal.notes %>
   <%- end -%>
 <%- } -%>
